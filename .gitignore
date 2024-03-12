@@ -4,3 +4,5 @@
 api_framework/tests/__pycache__/
 api_framework/tests/customers/__pycache__/
 api_framework/__pycache__/
+api_framework/src/__pycache__/
+api_framework/src/utils/__pycache__/
