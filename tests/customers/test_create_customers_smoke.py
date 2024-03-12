@@ -1,8 +1,8 @@
 import pytest
 import logging as logger
-from api_framework.src.helpers.customer_helpers import CustomerHelper
-from api_framework.src.utils.generic import generate_random_email_and_password
-from api_framework.src.utils.requests_utils import RequestUtility
+from src.helpers.customer_helpers import CustomerHelper
+from src.utils.generic import generate_random_email_and_password
+from src.utils.requests_utils import RequestUtility
 
 
 @pytest.mark.tcid29

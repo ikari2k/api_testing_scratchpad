@@ -1,5 +1,6 @@
 from typing import Dict
-from api_framework.src.utils.generic import generate_random_email_and_password
+
+from src.utils.generic import generate_random_email_and_password
 
 
 class CustomerHelper:
