@@ -1,8 +1,9 @@
 import pytest
 import logging as logger
-from src.helpers.customer_helpers import CustomerHelper
-from src.utils.generic import generate_random_email_and_password
-from src.utils.requests_utils import RequestUtility
+from customer_helpers import CustomerHelper
+
+from generic_utils import generate_random_email_and_password
+from requests_utils import RequestUtility
 
 
 @pytest.mark.tcid29
@@ -13,12 +14,12 @@ def test_create_customer_only_email_password():
 
     # create payload
     ch = CustomerHelper()
-    payload = ch.create_customer(email, password)
+    payload = ch.create_customer_payload(email, password)
     logger.debug(f"TEST: Payload for testing: {payload}")
     # make the call
     ru = RequestUtility()
-    response = ru.post("customer", payload)
-    logger.debug(f"TEST: Response for testing: {response}")
+    response = ru.post("customers", payload, expected_status_code=201)
+    logger.info(f"TEST: Response for testing: {response}")
     # verify status code
 
     # verify email in the response

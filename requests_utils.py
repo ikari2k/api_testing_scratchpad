@@ -1,9 +1,10 @@
-import json
 import requests
-from api_framework.src.configs.hosts_config import API_HOSTS
 import os
 from requests_oauthlib import OAuth1
 from dotenv import load_dotenv
+
+
+from config.configurations import API_HOSTS
 
 
 class RequestUtility:
@@ -26,7 +27,7 @@ class RequestUtility:
         url = "".join(filter(None, [self.base_url, endpoint]))
         if not headers or headers == "":
             headers = {"Content-Type": "application/json"}
-        rs_api = requests.post(url, json.dumps(payload), headers, auth=self.auth)
+        rs_api = requests.post(url, payload, headers, auth=self.auth)
         self.status_code = rs_api.status_code
         assert (
             self.status_code == expected_status_code
@@ -35,3 +36,9 @@ class RequestUtility:
         return rs_api
 
     def get(self): ...
+
+
+if __name__ == "__main__":
+    ru = RequestUtility()
+    data = {"email": "testuser_cuolhji1ybg@test.com", "password": "Password1"}
+    print(ru.post(endpoint="customers", payload=data, expected_status_code=201))

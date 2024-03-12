@@ -1,13 +1,11 @@
-from typing import Dict
-
-from src.utils.generic import generate_random_email_and_password
+from generic_utils import generate_random_email_and_password
 
 
 class CustomerHelper:
     def __init__(self) -> None:
         pass
 
-    def create_customer(
+    def create_customer_payload(
         self, email: str | None = None, password: str | None = None, **kwargs
     ) -> dict:
         if not email or email == "":
@@ -22,3 +20,8 @@ class CustomerHelper:
         payload.update(kwargs)
 
         return payload
+
+
+if __name__ == "__main__":
+    cs = CustomerHelper()
+    print(cs.create_customer())
