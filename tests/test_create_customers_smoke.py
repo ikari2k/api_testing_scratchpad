@@ -1,9 +1,9 @@
 import pytest
 import logging as logger
-from customer_helpers import CustomerHelper
+from helpers.customer_helpers import CustomerHelper
 
-from generic_utils import generate_random_email_and_password
-from requests_utils import RequestUtility
+from utils.generic_utils import generate_random_email_and_password
+from utils.requests_utils import RequestUtility
 
 
 @pytest.mark.tcid29

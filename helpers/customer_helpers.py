@@ -1,4 +1,4 @@
-from generic_utils import generate_random_email_and_password
+from utils.generic_utils import generate_random_email_and_password
 
 
 class CustomerHelper:
