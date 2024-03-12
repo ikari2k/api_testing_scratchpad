@@ -14,9 +14,7 @@ class CustomerHelper:
         if not password or email == "":
             password = "Password1"
 
-        payload = {}
-        payload["email"] = email
-        payload["password"] = password
+        payload = {"email": email, "password": password}
         payload.update(kwargs)
 
         return payload
@@ -24,4 +22,4 @@ class CustomerHelper:
 
 if __name__ == "__main__":
     cs = CustomerHelper()
-    print(cs.create_customer())
+    print(cs.create_customer_payload())

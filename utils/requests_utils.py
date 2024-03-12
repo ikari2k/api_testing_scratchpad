@@ -1,21 +1,17 @@
 import requests
 import os
 from requests_oauthlib import OAuth1
-from dotenv import load_dotenv
-
+from utils.credentials_utils import CredentialsUtilities
 
 from config.configurations import API_HOSTS
 
 
 class RequestUtility:
     def __init__(self) -> None:
-        load_dotenv()
+        self.wc_key, self.wc_secret = CredentialsUtilities.get_woo_commerce_credentials()
         self.env = os.environ.get("ENV", "test_env")
         self.base_url = API_HOSTS[self.env]
-        self.auth = OAuth1(
-            os.environ.get("WOOCOMMERCE_API_KEY"),
-            os.environ.get("WOOCOMMERCE_API_SECRET"),
-        )
+        self.auth = OAuth1(self.wc_key, self.wc_secret)
 
     def post(
         self,
