@@ -37,3 +37,9 @@ def test_create_customer_only_email_password():
     customer_dao = CustomersDAO()
     cust_info = customer_dao.get_customer_by_email(email)
     logger.debug(f"TEST customer infor from DB: {cust_info}")
+
+    id_in_api = response_to_json["id"]
+    id_in_db = cust_info[0]["ID"]
+    assert (
+        id_in_api == id_in_db
+    ), f'Create customer response "id" not the same as the one in DB'

@@ -8,7 +8,9 @@ from config.configurations import API_HOSTS
 
 class RequestUtility:
     def __init__(self) -> None:
-        self.wc_key, self.wc_secret = CredentialsUtilities.get_woo_commerce_credentials()
+        self.wc_key, self.wc_secret = (
+            CredentialsUtilities.get_woo_commerce_credentials()
+        )
         self.env = os.environ.get("ENV", "test_env")
         self.base_url = API_HOSTS[self.env]
         self.auth = OAuth1(self.wc_key, self.wc_secret)
@@ -24,14 +26,29 @@ class RequestUtility:
         if not headers or headers == "":
             headers = {"Content-Type": "application/json"}
         rs_api = requests.post(url, payload, headers, auth=self.auth)
-        self.status_code = rs_api.status_code
+        status_code = rs_api.status_code
         assert (
-            self.status_code == expected_status_code
-        ), f"Expected status code {expected_status_code}, but was {self.status_code}"
+            status_code == expected_status_code
+        ), f"Expected status code {expected_status_code}, but was {status_code}"
 
         return rs_api
 
-    def get(self): ...
+    def get(
+        self,
+        endpoint: str | None = None,
+        headers: dict | None = None,
+        expected_status_code: int = 200,
+    ):
+        url = "".join(filter(None, [self.base_url, endpoint]))
+        if not headers or headers == "":
+            headers = {"Content-Type": "application/json"}
+        rs_api = requests.get(url, headers, auth=self.auth)
+        status_code = rs_api.status_code
+        assert (
+            status_code == expected_status_code
+        ), f"Expected status code {expected_status_code}, but was {status_code}"
+
+        return rs_api
 
 
 if __name__ == "__main__":
