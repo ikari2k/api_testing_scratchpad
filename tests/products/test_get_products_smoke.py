@@ -3,9 +3,10 @@ from utils.requests_utils import RequestUtility
 from db_connectors.products_dao import ProductDAO
 import logging as logger
 
+pytestmark = [pytest.mark.products, pytest.mark.smoke]
+
 
 @pytest.mark.tcid24
-@pytest.mark.products
 def test_get_all_products():
     request_helper = RequestUtility()
     rs_api = request_helper.get("products").json()
@@ -14,7 +15,6 @@ def test_get_all_products():
 
 
 @pytest.mark.tcid25
-@pytest.mark.products
 def test_get_product_by_id():
     prod_dao = ProductDAO()
     rand_prod_from_db = prod_dao.get_random_product_from_db()[0]
