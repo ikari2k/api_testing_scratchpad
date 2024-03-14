@@ -1,3 +1,4 @@
+from tkinter import NO
 from typing import List
 
 from utils.requests_utils import RequestUtility
@@ -11,15 +12,17 @@ class ProductHelper:
 
     @staticmethod
     def create_product_payload(
-        name: str = None, type: str = "simple", regular_price: float = 10.99
+        name: str | None = None,
+        product_type: str = "simple",
+        regular_price: float = 10.99,
     ) -> dict:
         if not name:
             name = generate_random_string()
 
-        payload = {"name": name, "type": type, "regular_price": regular_price}
+        payload = {"name": name, "type": product_type, "regular_price": regular_price}
         return payload
 
-    def list_products(self, payload: dict = None) -> List[str]:
+    def list_products(self, payload: dict | None = None) -> List[str]:
         max_pages = 1000
         all_products = []
         for i in range(1, max_pages + 1):
@@ -28,14 +31,14 @@ class ProductHelper:
             if not payload:
                 payload = {}
 
-            if not "per_page" in payload.keys():
+            if "per_page" not in payload.keys():
                 payload["per_page"] = 100
 
             # add the current page number to the call
             payload["page"] = i
             rs_api = self.request_utility.get("products", payload).json()
 
-            # if there is not response then stop the loop b/c there are no more products
+            # if there is no response then stop the loop b/c there are no more products
             if not rs_api:
                 break
             else:

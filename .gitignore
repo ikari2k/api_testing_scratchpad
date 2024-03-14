@@ -5,3 +5,5 @@
 */__pycache__/*
 __pycache__/*
 .idea/
+tests/products/__pycache__/*
+tests/customers/__pycache__/*
