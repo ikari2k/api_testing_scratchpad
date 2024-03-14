@@ -4,6 +4,7 @@ import logging as logger
 
 
 @pytest.mark.tcid30
+@pytest.mark.customers
 def test_get_all_customers():
     request_helper = RequestUtility()
     rs_api = request_helper.get("customers").json()

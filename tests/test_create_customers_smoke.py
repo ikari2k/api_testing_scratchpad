@@ -9,6 +9,7 @@ from utils.requests_utils import RequestUtility
 
 
 @pytest.mark.tcid29
+@pytest.mark.customers
 def test_create_customer_only_email_password():
     logger.info("TEST: Create new customer with email and password only")
     email, password = generate_random_email_and_password()
@@ -43,3 +44,21 @@ def test_create_customer_only_email_password():
     assert (
         id_in_api == id_in_db
     ), f'Create customer response "id" not the same as the one in DB'
+
+
+@pytest.mark.tcid47
+@pytest.mark.customers
+def test_create_customer_fail_for_existing_email():
+    # get existing email
+    cust_dao = CustomersDAO()
+    existing_customer = cust_dao.get_random_customer_from_db()
+    existing_email = existing_customer[0]["user_email"]
+
+    req_helper = RequestUtility()
+    payload = {"email": existing_email, "password": "Password1"}
+    cust_api_info = req_helper.post(
+        endpoint="customers", payload=payload, expected_status_code=400
+    )
+    assert (
+        cust_api_info.json()["code"] == "registration-error-email-exists"
+    ), f"Create customer with existing email - error code is incorrect"
