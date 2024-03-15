@@ -42,6 +42,17 @@ class WooAPIUtility:
 
         return rs_api.json()
 
+    def put(self, wc_endpoint, params, expected_status_code=200):
+        rs_api = self.woocommerce_api.put(
+            wc_endpoint,
+            data=params,
+        )
+        assert (
+            rs_api.status_code == expected_status_code
+        ), f"Expected status code {expected_status_code} differs from actual one {rs.status_code}"
+
+        return rs_api.json()
+
 
 if __name__ == "__main__":
     woo = WooAPIUtility()

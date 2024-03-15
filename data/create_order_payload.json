@@ -1,7 +1,7 @@
 {
   "payment_method": "bacs",
   "payment_method_title": "Direct Bank Transfer",
-  "set_paid": true,
+  "set_paid": false,
   "billing": {
     "first_name": "John",
     "last_name": "Doe",
