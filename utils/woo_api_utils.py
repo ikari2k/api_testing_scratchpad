@@ -21,15 +21,26 @@ class WooAPIUtility:
         )
 
     def get(self, wc_endpoint, param=None, expected_status_code=200):
-        rs = self.woocommerce_api.get(
+        rs_api = self.woocommerce_api.get(
             wc_endpoint,
             params=param,
         )
         assert (
-            rs.status_code == expected_status_code
+            rs_api.status_code == expected_status_code
         ), f"Expected status code {expected_status_code} differs from actual one {rs.status_code}"
 
-        return rs.json()
+        return rs_api.json()
+
+    def post(self, wc_endpoint, data=None, expected_status_code=200):
+        rs_api = self.woocommerce_api.post(
+            wc_endpoint,
+            data=data,
+        )
+        assert (
+            rs_api.status_code == expected_status_code
+        ), f"Expected status code {expected_status_code} differs from actual one {rs.status_code}"
+
+        return rs_api.json()
 
 
 if __name__ == "__main__":
