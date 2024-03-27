@@ -15,8 +15,8 @@ class DBUtility:
         self.env = os.environ.get("ENV", "test_env")
         self.wp_host = os.environ.get("WP_HOST")
         assert self.wp_host, f"WP_HOST not set"
-        # if self.machine == "docker" and self.wp_host == "local":
-        #    raise Exception(f"Cannot run tests in docker")
+        if self.machine == "docker" and self.wp_host == "local":
+            raise Exception(f"Cannot run tests in docker")
 
         self.db_user, self.db_pass = CredentialsUtilities().get_db_credentials()
 

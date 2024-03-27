@@ -7,3 +7,4 @@ __pycache__/*
 .idea/
 tests/products/__pycache__/*
 tests/customers/__pycache__/*
+tests/orders/__pycache__/*
